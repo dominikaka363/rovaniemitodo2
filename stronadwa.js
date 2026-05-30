@@ -277,16 +277,16 @@ if (
     "CARTO Light": carto
   },
       {
-      '<img src="church.png" style="width:20px;height:20px;vertical-align:middle;"> Church': churchLayer,
-      '<img src="santa.png" style="width:20px;height:20px;vertical-align:middle;"> Santa Claus': santaLayer,
-      '<img src="flower.png" style="width:20px;height:20px;vertical-align:middle;"> Other': otherLayer,
-      '<img src="ren.png" style="width:20px;height:20px;vertical-align:middle;"> Animals':animalsLayer,
-      '<img src="sport.png" style="width:20px;height:20px;vertical-align:middle;"> Sport':sportLayer,
-      '<img src="child.png" style="width:20px;height:20px;vertical-align:middle;"> For kids': forKidsLayer,
-      '<img src="hut.png" style="width:20px;height:20px;vertical-align:middle;"> Lean-to': leanToLayer,
-      '<img src="museum.png" style="width:20px;height:20px;vertical-align:middle;"> Museum': museumLayer,
-      '<img src="free.png" style="width:20px;height:20px;vertical-align:middle;"> For free': forFreeLayer,
-      '<img src="sauna.png" style="width:20px;height:20px;vertical-align:middle;"> Sauna': saunaLayer
+      '<img src="icons/church.png" style="width:20px;height:20px;vertical-align:middle;"> Church': churchLayer,
+      '<img src="icons/santa.png" style="width:20px;height:20px;vertical-align:middle;"> Santa Claus': santaLayer,
+      '<img src="icons/flower.png" style="width:20px;height:20px;vertical-align:middle;"> Other': otherLayer,
+      '<img src="icons/ren.png" style="width:20px;height:20px;vertical-align:middle;"> Animals':animalsLayer,
+      '<img src="icons/sport.png" style="width:20px;height:20px;vertical-align:middle;"> Sport':sportLayer,
+      '<img src="icons/child.png" style="width:20px;height:20px;vertical-align:middle;"> For kids': forKidsLayer,
+      '<img src="icons/hut.png" style="width:20px;height:20px;vertical-align:middle;"> Lean-to': leanToLayer,
+      '<img src="icons/museum.png" style="width:20px;height:20px;vertical-align:middle;"> Museum': museumLayer,
+      '<img src="icons/free.png" style="width:20px;height:20px;vertical-align:middle;"> For free': forFreeLayer,
+      '<img src="icons/sauna.png" style="width:20px;height:20px;vertical-align:middle;"> Sauna': saunaLayer
       },
       { collapsed: false }
     ).addTo(map);
