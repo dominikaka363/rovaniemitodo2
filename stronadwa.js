@@ -40,7 +40,7 @@ function getIcon(category) {
 
   if (category === "santa claus") {
     return L.icon({
-      iconUrl: 'icons/santa.png',
+      iconUrl: './icons/santa.png',
       iconSize: [32, 32],
       iconAnchor: [16, 32]
     });
@@ -48,7 +48,7 @@ function getIcon(category) {
 
   if (category === "church") {
     return L.icon({
-      iconUrl: 'icons/church.png',
+      iconUrl: './icons/church.png',
       iconSize: [32, 32],
       iconAnchor: [16, 32]
     });
@@ -56,7 +56,7 @@ function getIcon(category) {
 
   if (category === "animals") {
     return L.icon({
-      iconUrl: 'icons/ren.png',
+      iconUrl: './icons/ren.png',
       iconSize: [32, 32],
       iconAnchor: [16, 32]
     });
@@ -64,7 +64,7 @@ function getIcon(category) {
 
   if (category === "sport") {
     return L.icon({
-      iconUrl: 'icons/sport.png',
+      iconUrl: './icons/sport.png',
       iconSize: [32, 32],
       iconAnchor: [16, 32]
     });
@@ -72,7 +72,7 @@ function getIcon(category) {
 
   if (category === "museum") {
   return L.icon({
-    iconUrl: 'icons/museum.png',
+    iconUrl: './icons/museum.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
@@ -80,7 +80,7 @@ function getIcon(category) {
 
 if (category === "sauna") {
   return L.icon({
-    iconUrl: 'icons/museum.png',
+    iconUrl: './icons/museum.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
@@ -88,7 +88,7 @@ if (category === "sauna") {
 
 if (category === "for kids") {
   return L.icon({
-    iconUrl: 'icons/child.png',
+    iconUrl: './icons/child.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
@@ -97,7 +97,7 @@ if (category === "for kids") {
 
 if (category === "lean-to") {
   return L.icon({
-    iconUrl: 'icons/hut.png',
+    iconUrl: './icons/hut.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
@@ -106,14 +106,14 @@ if (category === "lean-to") {
 
 if (category === "for free") {
   return L.icon({
-    iconUrl: 'icons/free.png',
+    iconUrl: './icons/free.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
 }
 
   return L.icon({
-    iconUrl: 'icons/flower.png',
+    iconUrl: './icons/flower.png',
     iconSize: [32, 32],
     iconAnchor: [16, 32]
   });
@@ -282,7 +282,7 @@ if (
       '<img src="icons/flower.png" style="width:20px;height:20px;vertical-align:middle;"> Other': otherLayer,
       '<img src="icons/ren.png" style="width:20px;height:20px;vertical-align:middle;"> Animals':animalsLayer,
       '<img src="icons/sport.png" style="width:20px;height:20px;vertical-align:middle;"> Sport':sportLayer,
-      '<img src="icons/child.png" style="width:20px;height:20px;vertical-align:middle;"> For kids': forKidsLayer,
+      '<img src="./icons/child.png" style="width:20px;height:20px;vertical-align:middle;"> For kids': forKidsLayer,
       '<img src="icons/hut.png" style="width:20px;height:20px;vertical-align:middle;"> Lean-to': leanToLayer,
       '<img src="icons/museum.png" style="width:20px;height:20px;vertical-align:middle;"> Museum': museumLayer,
       '<img src="icons/free.png" style="width:20px;height:20px;vertical-align:middle;"> For free': forFreeLayer,
