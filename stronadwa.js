@@ -508,5 +508,9 @@ L.control.layers(
     '♿ Accessible trails': accessibleTrailsLayer
   
   },
-  { collapsed: false }
+
+  { 
+  collapsed: true,
+  position: 'topright'
+}
 ).addTo(map);
