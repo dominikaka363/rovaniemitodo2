@@ -12,6 +12,9 @@ var map = L.map('map', {
   maxZoom: 17
 });
 
+
+
+
 // 📏 skala
 L.control.scale({
   position: 'bottomleft',
@@ -117,18 +120,28 @@ function getIcon(category) {
   });
 }
 
+function createClusterLayer() {
+  return L.markerClusterGroup({
+    showCoverageOnHover: false,
+    spiderfyOnMaxZoom: true,
+    disableClusteringAtZoom: 16,
+    maxClusterRadius: 100
+  });
+}
+
+
 
 // 📦 WARSTWY - nowa warstwa
-let churchLayer = L.layerGroup();
-let santaLayer = L.layerGroup();
-let otherLayer = L.layerGroup();
-let animalsLayer = L.layerGroup();
-let sportLayer = L.layerGroup();
-let forKidsLayer = L.layerGroup();
-let leanToLayer = L.layerGroup();
-let museumLayer = L.layerGroup();
-let forFreeLayer = L.layerGroup();
-let saunaLayer = L.layerGroup();
+let churchLayer = createClusterLayer();
+let santaLayer = createClusterLayer();
+let otherLayer = createClusterLayer();
+let animalsLayer = createClusterLayer();
+let sportLayer = createClusterLayer();
+let forKidsLayer = createClusterLayer();
+let leanToLayer = createClusterLayer();
+let museumLayer = createClusterLayer();
+let forFreeLayer = createClusterLayer();
+let saunaLayer = createClusterLayer();
 
 // 🥾 WARSTWY SZLAKÓW
 let natureTrailsLayer = L.layerGroup();
