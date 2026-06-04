@@ -1,7 +1,7 @@
 // 🔒 bounds (Rovaniemi ~15 km)
 var bounds = L.latLngBounds(
-  [66.3675, 25.3935],
-  [66.6375, 26.0675]
+  [66.3675, 25.1635],
+  [66.7575, 26.3175]
 );
 
 // 🗺️ mapa
@@ -12,6 +12,10 @@ var map = L.map('map', {
   maxZoom: 17
 });
 
+
+// 🔥 blokada przesuwania mapy z zapasem
+//map.setMaxBounds(bounds.pad(0.5));
+//map.options.maxBoundsViscosity = 0.7;
 
 
 
@@ -156,7 +160,7 @@ const natureTrails = [
   {
     file: 'Ounasvaara_nature_trail.geojson',
     name: 'Ounasvaara nature trail',
-    color: 'yellow',
+    color: '#FFE033',
     description: 'A forest nature trail in the Ounasvaara area, suitable for walking and enjoying Arctic nature.'
   },
   {
@@ -168,7 +172,7 @@ const natureTrails = [
   {
     file: 'Vaattunkivaara_nature_trail.geojson',
     name: 'Vaattunkivaara nature trail',
-    color: 'yellow',
+    color: '#FFE033',
     description: 'A scenic nature trail with forest landscapes, hills and views of the surrounding wilderness.'
   },
   {
@@ -215,7 +219,7 @@ const winterTrails = [
   {
     file: 'Pöyliövaara winter walking trail.geojson',
     name: 'Pöyliövaara winter walking trail',
-    color: 'yellow',
+    color: '#FFE033',
     type: 'Winter trail',
     description: 'A winter walking trail in the Pöyliövaara area, offering a peaceful route through northern nature.'
   }
@@ -227,35 +231,35 @@ const accessibleTrails = [
   {
     file: 'Harjulampi Accessible Trail.geojson',
     name: 'Harjulampi accessible trail',
-    color: 'green',
+    color: '#1F78FF',
     type: 'Accessible trail',
     description: 'An accessible trail around Harjulampi, suitable for visitors looking for an easier nature route.'
   },
   {
     file: 'Könkäänsaari_accessible_nature_trail.geojson',
     name: 'Könkäänsaari accessible nature trail',
-    color: 'green',
+    color: '#1F78FF',
     type: 'Accessible trail',
     description: 'An accessible nature trail on Könkäänsaari, offering an easy way to experience riverside nature.'
   },
   {
     file: 'Puistolampi Accessible Trail.geojson',
     name: 'Puistolampi accessible trail',
-    color: 'green',
+    color: '#1F78FF',
     type: 'Accessible trail',
     description: 'An accessible trail near Puistolampi, suitable for a short and easy outdoor visit.'
   },
   {
     file: 'Pöyliövaara accessible trail.geojson',
     name: 'Pöyliövaara accessible trail',
-    color: 'green',
+    color: '#1F78FF',
     type: 'Accessible trail',
     description: 'An accessible trail in the Pöyliövaara area, designed for easier movement in nature.'
   },
   {
     file: 'Vikaköngäs accessible trail.geojson',
     name: 'Vikaköngäs accessible trail',
-    color: 'green',
+    color: '#1F78FF',
     type: 'Accessible trail',
     description: 'An accessible trail near Vikaköngäs, offering beautiful natural scenery close to the river.'
   }
@@ -267,7 +271,7 @@ const summerTrails = [
   {
     file: 'Könkäiden Polku trail.geojson',
     name: 'Könkäiden Polku trail',
-    color: 'yellow',
+    color: '#FFE033',
     type: 'Summer trail',
     description: 'A scenic hiking trail with forest and riverside landscapes.'
   },
@@ -302,14 +306,14 @@ const summerTrails = [
   {
     file: 'Pöyliövaara Nature Experience Trail.geojson',
     name: 'Pöyliövaara nature experience trail',
-    color: 'yellow',
+    color: '#FFE033',
     type: 'Summer trail',
     description: 'A nature experience trail in Pöyliövaara, suitable for exploring local natural features.'
   }
 ];
 
 
-// 🥾 FUNKCJA DODAWANIA SZLAKU
+// 🥾 FUNKCJA DODAWANIA SZLAKU + WIĘKSZA STREFA KLIKNIĘCIA
 function addTrail(trailInfo, targetLayer, trailType) {
   fetch(trailInfo.file)
     .then(response => {
@@ -320,38 +324,50 @@ function addTrail(trailInfo, targetLayer, trailType) {
     })
     .then(data => {
 
-      let trail = L.geoJSON(data, {
+      let popup = `
+        <div style="text-align:center">
+          <h3>🥾 ${trailInfo.name}</h3>
+
+          <p style="font-size:13px; margin:0 0 10px;">
+            ${trailInfo.description}
+          </p>
+
+          <p style="font-size:12px; margin:0;">
+            <b>Trail type:</b> ${trailType}
+          </p>
+        </div>
+      `;
+
+      // 1️⃣ Widoczna linia szlaku
+      let visibleTrail = L.geoJSON(data, {
         style: {
           color: trailInfo.color,
           weight: 4,
           opacity: 0.9
+        }
+      });
+
+      // 2️⃣ Niewidoczna, gruba linia do klikania
+      let clickTrail = L.geoJSON(data, {
+        style: {
+          color: trailInfo.color,
+          weight: 35,        // szerokość strefy kliknięcia
+          opacity: 0,        // niewidoczna
+          fillOpacity: 0
         },
 
         onEachFeature: function(feature, layer) {
-          let popup = `
-            <div style="text-align:center">
-              <h3>🥾 ${trailInfo.name}</h3>
-
-              <p style="font-size:13px; margin:0 0 10px;">
-                ${trailInfo.description}
-              </p>
-
-              <p style="font-size:12px; margin:0;">
-                <b>Trail type:</b> ${trailType}
-              </p>
-            </div>
-          `;
-
           layer.bindPopup(popup);
         }
       });
 
-      trail.addTo(targetLayer);
+      // dodajemy obie linie do jednej warstwy
+      clickTrail.addTo(targetLayer);
+      visibleTrail.addTo(targetLayer);
 
     })
     .catch(err => console.error("Trail loading error:", err));
 }
-
 
 // 🌲 LOAD NATURE TRAILS
 natureTrails.forEach(trail => {
@@ -377,7 +393,7 @@ accessibleTrails.forEach(trail => {
 
 
 
-// 📍 FUNKCJA TWORZENIA MARKERA
+// 📍 FUNKCJA TWORZENIA MARKERA do ikon
 function createMarker(feature, categories, iconCategory) {
   let coords = feature.geometry.coordinates;
   let props = feature.properties;
@@ -406,8 +422,8 @@ function createMarker(feature, categories, iconCategory) {
 }
 
 
-// 📍 WCZYTANIE ATRAKCJI GEOJSON
-fetch('a5.geojson')
+// 📍 WCZYTANIE ATRAKCJI GEOJSON - ikony
+fetch('a5_eng.geojson')
   .then(res => res.json())
   .then(data => {
 
@@ -516,9 +532,9 @@ L.control.layers(
 
     // SZLAKI 
     'Nature trails': natureTrailsLayer,
-    '❄️ Winter trails': winterTrailsLayer,
-    '🌿 Summer trails': summerTrailsLayer,
-    '♿ Accessible trails': accessibleTrailsLayer
+    'Winter trails': winterTrailsLayer,
+    'Summer trails': summerTrailsLayer,
+    'Accessible trails': accessibleTrailsLayer
   
   },
 
@@ -527,3 +543,5 @@ L.control.layers(
   position: 'topright'
 }
 ).addTo(map);
+
+
